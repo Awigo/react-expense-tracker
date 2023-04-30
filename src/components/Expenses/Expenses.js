@@ -19,14 +19,19 @@ function Expenses(props) {
           selected={filteredYear}
           onChangeFilter={yearChangeHandler}
         />
-        {props.items.map(expense => {
-          return <ExpenseItem
-            key = {expense.id}
-            title={expense.title}
-            amount={expense.amount}
-            date={expense.date}
-          />
-        })}
+        {props.items
+          .filter(expense => {
+            return expense.date.getFullYear() == filteredYear
+          })
+          .map(expense => {
+            return <ExpenseItem
+              key={expense.id}
+              title={expense.title}
+              amount={expense.amount}
+              date={expense.date}
+            />
+          })
+        }
       </Card>
     </div>
   );
